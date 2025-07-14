@@ -31,6 +31,11 @@ import warnings
 warnings.filterwarnings('ignore')
 
 df = pd.read_csv("dataset/text.csv") 
+df = df[df["label"]!= 4] #remove fear label
+df = df[df["label"]!= 5] #remove suprise label
+df = df[df["label"]!= 2] #remove love label
+
+
 #shape: (416809,3). #index, sentence, label.
 #LABEL, count: 
 # [sadness (0), 121187], 
@@ -63,5 +68,9 @@ comparison = pd.DataFrame({
 
 print(comparison.head(50))
 
+mse = mean_squared_error(prediction,y_test)
+print(mse)
 
 
+#0.52 with all labels
+#0.22 w/o fear and suprise
