@@ -42,7 +42,7 @@ num_to_mood = {0: "sadness",
 model = joblib.load("model/mood_classifier_kaggle.pkl")
 vectorizer = joblib.load("model/tfidf_vectorizer.pkl")
 
-test = ["im really happy right now", "I hate  my life","No way you got the job!","im terrified of ghosts"]
+test = ["why didnt you u text me last night???", "i miss u so much"]
 X = vectorizer.transform(test)
 
 y_pred = model.predict(X)
