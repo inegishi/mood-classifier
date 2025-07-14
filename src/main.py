@@ -29,9 +29,7 @@ plt.rcParams['figure.figsize'] = [10,6]
 import warnings 
 warnings.filterwarnings('ignore')
 
-
-#LABEL: sadness (0), joy (1), love (2), anger (3), fear (4), and surprise (5).
-
+#model output: number
 num_to_mood = {0: "sadness",
                1:"joy",
                2: "love",
@@ -42,7 +40,11 @@ num_to_mood = {0: "sadness",
 model = joblib.load("model/mood_classifier_kaggle.pkl")
 vectorizer = joblib.load("model/tfidf_vectorizer.pkl")
 
-test = ["why didnt you u text me last night???", "i miss u so much"]
+test = [
+    "Im mad af rn",
+    "WHAT!"
+]
+
 X = vectorizer.transform(test)
 
 y_pred = model.predict(X)

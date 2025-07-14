@@ -32,7 +32,14 @@ warnings.filterwarnings('ignore')
 
 df = pd.read_csv("dataset/text.csv") 
 #shape: (416809,3). #index, sentence, label.
-#LABEL: sadness (0), joy (1), love (2), anger (3), fear (4), and surprise (5).
+#LABEL, count: 
+# [sadness (0), 121187], 
+# [joy (1): 141067],
+# [love (2): 34554], 
+# [anger (3): 57417], 
+# [fear (4): 47712],
+# [surprise (5): 14972]
+
 
 vectorizer = TfidfVectorizer()
 X = vectorizer.fit_transform(df["text"])
