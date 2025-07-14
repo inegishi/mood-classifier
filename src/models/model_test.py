@@ -41,8 +41,7 @@ model = joblib.load("model/mood_classifier_kaggle.pkl")
 vectorizer = joblib.load("model/tfidf_vectorizer.pkl")
 
 test = [
-    "Im mad af rn",
-    "WHAT!"
+    "Bruh are you serious right now? I cant believe you would eat my cupcake without asking me. Im so mad rn"
 ]
 
 X = vectorizer.transform(test)
