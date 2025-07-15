@@ -23,8 +23,32 @@ from sklearn.preprocessing import PolynomialFeatures, LabelEncoder
 from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 
+from src.util.extract_text import extract_raw_text
 import matplotlib.pyplot as plt
 plt.rcParams['figure.figsize'] = [10,6]
 
 import warnings 
 warnings.filterwarnings('ignore')
+
+
+num_to_mood = {0: "sadness",
+               1:"joy",
+            #    2: "love",
+               3: "anger",
+            #    4: "fear",
+            #    5: "suprise"
+            }
+
+
+model = joblib.load("model/mood_classifier_kaggle.pkl")
+vectorizer = joblib.load("model/tfidf_vectorizer.pkl")
+
+data_path = "dataset/unnamed.jpg"
+text = extract_raw_text(data_path)
+
+
+X = vectorizer.transform(text)
+y_pred = model.predict(X)
+
+for i in y_pred:
+    print(num_to_mood[i])
