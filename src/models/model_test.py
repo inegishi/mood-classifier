@@ -1,29 +1,16 @@
-import os
-import math
-import numpy as np
-import pandas as pd
-import seaborn as sns
 import joblib
-from datetime import datetime
-
-#from brokenaxes import brokenaxes
-from statsmodels.formula import api
-from sklearn.feature_selection import RFE
-from sklearn.preprocessing import StandardScaler
+import pandas as pd
 from sklearn.model_selection import train_test_split
-from statsmodels.stats.outliers_influence import variance_inflation_factor
-
-from sklearn.decomposition import PCA
-from sklearn.linear_model import Ridge
-from sklearn.linear_model import Lasso
-from sklearn.linear_model import ElasticNet
-from sklearn.linear_model import LinearRegression, LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.preprocessing import PolynomialFeatures, LabelEncoder
-from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import LabelEncoder
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 import matplotlib.pyplot as plt
+plt.rcParams['figure.figsize'] = [10,6]
+
+import warnings 
+warnings.filterwarnings('ignore')
+
 plt.rcParams['figure.figsize'] = [10,6]
 
 import warnings 
@@ -32,10 +19,10 @@ warnings.filterwarnings('ignore')
 #model output: number
 num_to_mood = {0: "sadness",
                1:"joy",
-            #    2: "love",
-               3: "anger",
-            #    4: "fear",
-            #    5: "suprise"
+               2: "anger",
+            #  3: "love",
+            #   4: "fear",
+            #   5: "suprise"
             }
 
 model = joblib.load("model/mood_classifier_kaggle.pkl")
@@ -57,12 +44,12 @@ test = [
     "I wish things were different…",                # sadness
     "I can’t believe how happy I am right now.",    # joy
     "Don’t talk to me like I’m stupid.",            # anger
-    "You mean the world to me.",                    # love
+    "im so mad I hate you",                    # love
 ]
 
 
 X = vectorizer.transform(test)
 
 y_pred = model.predict(X)
-for i in y_pred:
-    print(num_to_mood[i])
+for i in range(len(test)):
+    print(f"message {i+1}: {test[i]} \nmood: {num_to_mood[y_pred[i]]}\n")
